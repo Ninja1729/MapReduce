@@ -11,7 +11,7 @@ hadoop jar wordcount-1.0-SNAPSHOT.jar wordcount/WordCount /user/nkandavel/wordco
 
 Note : gz compressed format cannot be split
 
-# Steps to execute Hadoop program using Driver
+# Steps to execute Hadoop program using Oozie
 
 To run a oozie job,
 1. put the coordinator.properties file into client
