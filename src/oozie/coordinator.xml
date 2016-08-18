@@ -1,0 +1,49 @@
+<coordinator-app name="word-count" frequency="${coord:minutes(5)}"
+                 start="${startDate}"
+                 end="${endDate}"
+                 timezone="UTC"
+                 xmlns="uri:oozie:coordinator:0.2">
+    <controls>
+        <concurrency>1</concurrency>
+    </controls>
+
+    <!-- Format of startDate and endDate is: YYYY-MM-DDTMM:SSZ-->
+    <datasets>
+        <!-- Input datasets-->
+        <dataset name="wc-input" frequency="${coord:days(10)}"
+                 initial-instance="2014-01-01T00:00Z" timezone="UTC">
+            <uri-template>${nameNode}/user/nkandavel/wordcount/input.txt</uri-template>
+            <done-flag></done-flag>
+        </dataset>
+    </datasets>
+    <input-events>
+        <data-in name="wc-di" dataset="wc-input">
+            <instance>${coord:current(-1)}</instance>
+        </data-in>
+    </input-events>
+    <output-events>
+    </output-events>
+    <action>
+        <workflow>
+            <app-path>${workflowAppPath}</app-path>
+            <configuration>
+                <property>
+                    <name>jobTracker</name>
+                    <value>${jobTracker}</value>
+                </property>
+                <property>
+                    <name>nameNode</name>
+                    <value>${nameNode}</value>
+                </property>
+                <property>
+                    <name>queueName</name>
+                    <value>default</value>
+                </property>
+                <property>
+                    <name>wcInputFile</name>
+                    <value>${coord:dataIn('wc-di')}/*</value>
+                </property>
+            </configuration>
+        </workflow>
+    </action>
+</coordinator-app>

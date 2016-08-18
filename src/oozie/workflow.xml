@@ -1,0 +1,18 @@
+
+<workflow-app name="WCworkflow" xmlns="uri:oozie:workflow:0.4">
+    <start to="nwordcount"/>
+    <action name="nwordcount">
+        <java>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <main-class>wordcount.WordCount</main-class>
+            <arg>${wcInputFile}</arg>
+        </java>
+        <ok to="end"/>
+        <error to="kill"/>
+    </action>
+    <kill name="kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <end name="end"/>
+</workflow-app>
