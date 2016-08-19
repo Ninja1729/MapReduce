@@ -1,7 +1,7 @@
 # Steps to execute Hadoop program using Driver
 
 1. Write the jar file and put it into hadoop client
-scp WordCountNin/target/wordcount-1.0-SNAPSHOT.jar nkandavel@hdpclient1.bigdatadev3.lb.truecarcorp.com:/home/nkandavel
+scp WordCountNin/target/wordcount-1.0-SNAPSHOT.jar nkandavel@hdfs url/home/nkandavel
 
 2. Create the input file in the hadoop cluster directly or create in client and move it to cluster as below.
 hdfs dfs -copyFromLocal input.txt /user/nkandavel/wordcount/input.txt
@@ -15,16 +15,16 @@ Note : gz compressed format cannot be split
 
 To run a oozie job,
 1. put the coordinator.properties file into client
-scp coordinator.properties nkandavel@hdpclient1.bigdatadev3.lb.truecarcorp.com:/home/nkandavel
+scp coordinator.properties hdfs url/home/nkandavel
 
 2. put the coordinator.xml and workflow.xml into the cluster in /user/nkandavel/testoz/ folder
-scp coordinator.xml nkandavel@hdpclient1.bigdatadev3.lb.truecarcorp.com:/home/nkandavel
-scp workflow.xml nkandavel@hdpclient1.bigdatadev3.lb.truecarcorp.com:/home/nkandavel
+scp coordinator.xml hdfs url/home/nkandavel
+scp workflow.xml hdfs url/home/nkandavel
 hadoop fs -copyFromLocal coordinator.xml  /user/nkandavel/testoz/
 hadoop fs -copyFromLocal workflow.xml  /user/nkandavel/testoz/
 
 3. put the jar file into the cluster /user/nkandavel/testoz/lib folder 
-scp jar nkandavel@hdpclient1.bigdatadev3.lb.truecarcorp.com:/home/nkandavel
+scp jar hdfs url/home/nkandavel
 hadoop fs -copyFromLocal jar  /user/nkandavel/testoz/lib
 
 Run the script
